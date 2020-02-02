@@ -1,0 +1,291 @@
+﻿/* Move down content because we have a fixed navbar that is 50px tall */
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+.logo {
+    max-height: 25px;
+    max-width: 25px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.page-bar {
+    background-color: white;
+    border-bottom: 2px solid black;
+}
+
+.main-back {
+    background-color: lightgray;
+    height: 100%;
+    display: flex;
+}
+
+.bug-tracker {
+    color: orangered;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.w-75 {
+    width: 75%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.w-33 {
+    width: 33%;
+}
+
+.w-25 {
+    width: 25%;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.h-75 {
+    height: 75%;
+}
+
+.h-50 {
+    height: 50%;
+}
+
+.h-25 {
+    height: 25%;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.mr-auto {
+    margin-right: auto;
+}
+
+.ml-15-px {
+    margin-left: 15px;
+}
+
+.mr-15-px {
+    margin-right: 15px;
+}
+
+.mt-15-px {
+    margin-top: 15px;
+}
+
+
+/*Mobile Screen*/
+@media screen and (max-width: 575.98px) {
+
+    .d-sm-block {
+        display: block;
+    }
+
+    .d-sm-flex {
+        display: flex;
+    }
+
+    .d-sm-none {
+        display: none;
+    }
+}
+
+/*Tablet Screen*/
+@media screen and (min-width: 575.98px) {
+    .jumbotron {
+        margin-top: 20px;
+    }
+
+    .body-content {
+        padding: 0;
+    }
+
+    .d-md-block {
+        display: block;
+    }
+
+    .d-md-flex {
+        display: flex;
+    }
+
+    .d-md-none {
+        display: none;
+    }
+}
+
+/*Desktop screen*/
+@media screen and (min-width: 768px){
+    .d-lg-block {
+        display: block;
+    }
+
+    .d-lg-flex {
+        display: flex;
+    }
+
+    .d-lg-none {
+        display: none;
+    }
+}
+
+.curved-borders {
+    border-radius: 25px;
+}
+
+.mt-auto {
+    margin-top: auto;
+}
+
+.mb-auto {
+    margin-bottom: auto;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.m-auto {
+    margin: auto;
+}
+
+.back-white {
+    background-color: white;
+}
+
+.pl-0 {
+    padding-left: 0;
+}
+
+.pr-0 {
+    padding-right: 0;
+}
+
+.p-15px {
+    padding: 15px;
+}
+
+.p-25px {
+    padding: 25px;
+}
+
+.pt-15px {
+    padding-top: 15px;
+}
+
+.pl-15-px {
+    padding-left: 15px;
+}
+
+.pr-15-px {
+    padding-right: 15px;
+}
+
+.title {
+    width: 100%;
+    padding-bottom: 15px;
+    border-bottom: 2px dashed grey;
+}
+
+    .title span {
+        font-weight: bold;
+    }
+
+.d-block {
+    display: block;
+}
+
+.pt-20px {
+    padding-top: 25px;
+}
+
+.border-bottom-dashed {
+    border-bottom: 2px dashed black;
+}
+
+.border-right-solid {
+    border-right: solid black 1px;
+}
+
+.border-left-solid {
+    border-left: solid black 1px;
+}
+
+.login-div {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.click-link {
+    color: blue;
+}
+
+    .click-link :hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.side-bar {
+    background-color: white;
+    height: 100%;
+    width: 15%;
+    float: left;
+}
+
+.menu-item {
+    width: 100%;
+    padding: 1rem;
+}
+
+    .menu-item a {
+    }
+
+        .menu-item a span {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+.error-input {
+    border: 1px solid red;
+}
+
+.success-message {
+    color: forestgreen;
+    font-weight: bold;
+}

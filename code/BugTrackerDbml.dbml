@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="bug_tracker" Class="BugTrackerDbmlDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=localhost;Initial Catalog=bug_tracker;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="bug_trackerConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.notes" Member="notes">
+    <Type Name="note">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ticket_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="created_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="creator_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Association Name="ticket_note" Member="ticket" ThisKey="ticket_id" OtherKey="id" Type="ticket" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.projects" Member="projects">
+    <Type Name="project">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="created_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="created_by" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bug_tracker_menu_headers" Member="bug_tracker_menu_headers">
+    <Type Name="bug_tracker_menu_header">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="menu_title" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="has_submenu" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="top_level" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="bug_tracker_menu_header_bug_tracker_menu_page" Member="bug_tracker_menu_pages" ThisKey="id" OtherKey="menu_id" Type="bug_tracker_menu_page" />
+      <Association Name="bug_tracker_menu_header_bug_tracker_menu_submenus" Member="bug_tracker_menu_submenus" ThisKey="id" OtherKey="menu_header_id" Type="bug_tracker_menu_submenus" />
+      <Association Name="bug_tracker_menu_header_bug_tracker_menu_submenus1" Member="bug_tracker_menu_submenus1" ThisKey="id" OtherKey="submenu_id" Type="bug_tracker_menu_submenus" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bug_tracker_pages" Member="bug_tracker_pages">
+    <Type Name="bug_tracker_page">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="page_url" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="friendly_url" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="sequence" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="icon" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="bug_tracker_page_bug_tracker_menu_page" Member="bug_tracker_menu_pages" ThisKey="id" OtherKey="page_id" Type="bug_tracker_menu_page" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bug_tracker_menu_pages" Member="bug_tracker_menu_pages">
+    <Type Name="bug_tracker_menu_page">
+      <Column Name="menu_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="page_id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="bug_tracker_menu_header_bug_tracker_menu_page" Member="bug_tracker_menu_header" ThisKey="menu_id" OtherKey="id" Type="bug_tracker_menu_header" IsForeignKey="true" />
+      <Association Name="bug_tracker_page_bug_tracker_menu_page" Member="bug_tracker_page" ThisKey="page_id" OtherKey="id" Type="bug_tracker_page" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bug_tracker_menu_submenus" Member="bug_tracker_menu_submenus">
+    <Type Name="bug_tracker_menu_submenus">
+      <Column Name="menu_header_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="submenu_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="bug_tracker_menu_header_bug_tracker_menu_submenus" Member="bug_tracker_menu_header" ThisKey="menu_header_id" OtherKey="id" Type="bug_tracker_menu_header" IsForeignKey="true" />
+      <Association Name="bug_tracker_menu_header_bug_tracker_menu_submenus1" Member="bug_tracker_menu_header1" ThisKey="submenu_id" OtherKey="id" Type="bug_tracker_menu_header" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tickets" Member="tickets">
+    <Type Name="ticket">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="created_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="created_by" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="ticket_note" Member="notes" ThisKey="id" OtherKey="ticket_id" Type="note" />
+      <Association Name="ticket_priority_ticket" Member="ticket_priority" ThisKey="priority" OtherKey="id" Type="ticket_priority" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ticket_priority" Member="ticket_priorities">
+    <Type Name="ticket_priority">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Association Name="ticket_priority_ticket" Member="tickets" ThisKey="id" OtherKey="priority" Type="ticket" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ticket_status" Member="ticket_status">
+    <Type Name="ticket_status">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
