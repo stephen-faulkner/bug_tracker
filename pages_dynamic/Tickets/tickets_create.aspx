@@ -7,7 +7,7 @@
     <div class="w-100 d-flex">
         <div class="col-sm-11 col-lg-6 curved-borders m-auto back-white p-25px text-center">
             <div class="title">
-                <span>Create Ticket</span><asp:Literal ID="ltlTicketNo" runat="server" Text="" />
+                <span>Create Ticket</span>
             </div>
             <div class="col-12 row">
                 <div class="d-flex col-sm-12 mt-15-px">
@@ -55,6 +55,7 @@
                 </div>
                 <div class="d-flex col-sm-12 mt-15-px">
                     <asp:Label ID="lblMessage" runat="server" ClientIDMode="Static" Text="" />
+                    <asp:Literal ID="ltlMessage" runat="server" ClientIDMode="Static" Text="" />
                 </div>
             </div>
         </div>

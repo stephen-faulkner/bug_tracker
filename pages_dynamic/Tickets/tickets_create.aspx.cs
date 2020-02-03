@@ -56,12 +56,28 @@ namespace bug_tracker.pages_dynamic.Tickets
         protected void btnCreateTicket_Click(object sender, EventArgs e)
         {
             ticket new_ticket = new ticket();
+            string ticket_message = null;
+            try
+            {
+                new_ticket.created_by = Session["userid"].ToString().Trim();
+                new_ticket.created_date = DateTime.Now;
+                new_ticket.title = txtTicketTitle.Text;
+                new_ticket.description = txtTicketDescr.Text;
+                new_ticket.priority = Convert.ToInt32(ddlTicketPriority.SelectedValue);
+                new_ticket.status = TicketsDB.GetStatus("Open").id;
 
-            new_ticket.created_by = Session["userid"].ToString().Trim();
-            new_ticket.created_date = DateTime.Now;
-            new_ticket.title = txtTicketTitle.Text;
-            new_ticket.description = txtTicketDescr.Text;
-            new_ticket.priority = Convert.ToInt32(ddlTicketPriority.SelectedValue);
+                TicketsDB.AddEditTicket(new_ticket);
+
+                ticket_message = String.Format("Ticket created with ticket number #{0}", new_ticket.id.ToString().PadLeft(10, '0'));
+            }
+            catch(Exception ex)
+            {
+                log_type type = LogsDB.GetLogType("error");
+                LogsDB.AddLog("Error creating new ticket", type.id, ex);
+                ticket_message = "Unexpected error creating ticket. Refresh page and try again or contact IT";
+            }
+
+            ltlMessage.Text = String.Format("<span class='success-message'>{0}</span>", ticket_message);
         }
     }
 }

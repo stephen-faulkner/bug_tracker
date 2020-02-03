@@ -15,15 +15,6 @@ namespace bug_tracker.pages_dynamic.Tickets
     {
 
         /// <summary>
-        /// ltlTicketNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlTicketNo;
-
-        /// <summary>
         /// ddlProjects control.
         /// </summary>
         /// <remarks>
@@ -112,5 +103,14 @@ namespace bug_tracker.pages_dynamic.Tickets
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMessage;
+
+        /// <summary>
+        /// ltlMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlMessage;
     }
 }
