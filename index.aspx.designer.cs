@@ -87,12 +87,12 @@ namespace bug_tracker
         protected global::System.Web.UI.WebControls.LinkButton btnDevLogin;
 
         /// <summary>
-        /// btnUserAdmin control.
+        /// btnUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnUserAdmin;
+        protected global::System.Web.UI.WebControls.LinkButton btnUser;
     }
 }

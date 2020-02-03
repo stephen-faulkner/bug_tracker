@@ -24,14 +24,20 @@ namespace bug_tracker.code
         {
             bool sent = false;
 
-            SmtpClient client = new SmtpClient(ConfigurationManager.AppSettings["OutlookServer"], Convert.ToInt32(ConfigurationManager.AppSettings["OutlookPort"]));
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.EnableSsl = true;
-            client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["EmailDefaultFrom"], ConfigurationManager.AppSettings["EmailPword"]);
+            try
+            {
+                SmtpClient client = new SmtpClient(ConfigurationManager.AppSettings["OutlookServer"], Convert.ToInt32(ConfigurationManager.AppSettings["OutlookPort"]));
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.EnableSsl = true;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["EmailDefaultFrom"], ConfigurationManager.AppSettings["EmailPword"]);
 
-            client.Send(mail);
-
+                client.Send(mail);
+            }
+            catch(Exception ex)
+            {
+                LogsDB.AddLog(string.Format("Error sending email to {0}", string.Join(",", mail.To.ToList())), LogsDB.GetLogType("error").id, ex);
+            }
             return sent;
         }
 

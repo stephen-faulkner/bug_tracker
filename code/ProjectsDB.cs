@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Data.Linq;
+using System.Globalization;
 
 namespace bug_tracker.code
 {
@@ -27,7 +28,7 @@ namespace bug_tracker.code
             project project = null;
 
             project = (from _project in bug_tracker.projects
-                       where _project.name.ToLower().Trim() == project_name.ToLower().Trim()
+                       where _project.name.ToLower().Trim() == project_name.ToLower(CultureInfo.CurrentCulture).Trim()
                        select _project).FirstOrDefault();
 
             return project;

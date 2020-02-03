@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Linq;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -140,7 +141,7 @@ namespace bug_tracker.code
         public static log_type GetLogType(string this_log_type)
         {
             log_type type = (from log_types in bug_tracker.log_types
-                             where log_types.log_type1.ToLower() == this_log_type.ToLower()
+                             where log_types.log_type1.ToLower(CultureInfo.CurrentCulture) == this_log_type.ToLower(CultureInfo.CurrentCulture)
                              select log_types).FirstOrDefault();
 
             return type;

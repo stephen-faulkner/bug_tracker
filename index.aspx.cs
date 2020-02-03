@@ -50,5 +50,30 @@ namespace bug_tracker
                 Response.Redirect("/pages_dynamic/home.aspx");
             }
         }
+
+        protected void Default_Login(object sender, EventArgs e)
+        {
+            LinkButton btn = (LinkButton)sender;
+            MembershipUser user = null;
+
+            switch (btn.ID)
+            {
+                case "btnAdminLogin":
+                    user = Membership.GetUser("Admin Test");
+                    break;
+                case "btnProjectLogin":
+                    user = Membership.GetUser("Project Manager");
+                    break;
+                case "btnDevLogin":
+                    user = Membership.GetUser("Developer Test");
+                    break;
+                case "btnUser":
+                    user = Membership.GetUser("User test");
+                    break;
+            }
+
+            wFunctions.SetUserSessionVars(user);
+            Response.Redirect("/pages_dynamic/home.aspx");
+        }
     }
 }

@@ -23,8 +23,8 @@
                     <label for="txtPword"><strong>Password</strong></label>
                     <asp:TextBox ID="txtPWord" runat="server" ClientIDMode="Static" CssClass="form-control ml-auto mr-auto" Text="" AutoCompleteType="None" TextMode="Password" />
                 </div>
-                <div class="d-block text-center pt-15px">             
-                    <input type="checkbox" class="checkbox-inline" id="chkRememberMe" runat="server" clientidmode="static" />       
+                <div class="d-block text-center pt-15px">
+                    <input type="checkbox" class="checkbox-inline" id="chkRememberMe" runat="server" clientidmode="static" />
                     <label for="chkRememberMe">Remember Me</label>
                 </div>
                 <div class="d-block pt-15px w-100">
@@ -52,49 +52,6 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Demo Accounts</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="ml-auto mr-auto">
-                            <asp:LinkButton ID="btnAdminLogin" runat="server" ClientIDMode="Static">
-                                <i class="material-icons">account_box</i>
-                            </asp:LinkButton>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="ml-auto mr-auto">
-                            <asp:LinkButton ID="btnProjectLogin" runat="server" ClientIDMode="Static">
-                                <i class="material-icons">assignment_ind</i>
-                            </asp:LinkButton>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="ml-auto mr-auto">
-                            <asp:LinkButton ID="btnDevLogin" runat="server" ClientIDMode="Static">
-                                <i class="material-icons">record_voice_over</i>
-                            </asp:LinkButton>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="ml-auto mr-auto">
-                            <asp:LinkButton ID="btnUserAdmin" runat="server" ClientIDMode="Static">
-                                <i class="material-icons">face</i>
-                            </asp:LinkButton>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" tabindex="-1" role="dialog" id="mdlDemoSignIn">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
                     <h5 class="modal-title">Forgot Password</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -106,6 +63,53 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary">Send Password Reset Email</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="mdlDemoSignIn">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Select Default Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-sm-12 col-md-6 text-center mt-15-px">
+                            <asp:LinkButton ID="btnAdminLogin" runat="server" ClientIDMode="Static" OnClick="Default_Login">
+                                <i class="material-icons">account_box</i>
+                                <div class="d-block text-center">
+                                    <strong>Admin</strong>
+                                </div>
+                            </asp:LinkButton>
+                    </div>
+                    <div class="col-sm-12 col-md-6 text-center mt-15-px">
+                            <asp:LinkButton ID="btnProjectLogin" runat="server" ClientIDMode="Static" OnClick="Default_Login">
+                                <i class="material-icons">assignment_ind</i>
+                                <div class="d-block text-center">
+                                    <strong>Project Manager</strong>
+                                </div>
+                            </asp:LinkButton>
+                    </div>
+                    <div class="col-sm-12 col-md-6 text-center mt-15-px">
+                            <asp:LinkButton ID="btnDevLogin" runat="server" ClientIDMode="Static" OnClick="Default_Login">
+                                <i class="material-icons">record_voice_over</i>
+                                <div class="d-block text-center">
+                                    <strong>Developer</strong>
+                                </div>
+                            </asp:LinkButton>
+                    </div>
+                    <div class="col-sm-12 col-md-6 text-center mt-15-px">
+                            <asp:LinkButton ID="btnUser" runat="server" ClientIDMode="Static" OnClick="Default_Login">
+                                <i class="material-icons">face</i>
+                                <div class="d-block text-center">
+                                    <strong>User</strong>
+                                </div>
+                            </asp:LinkButton>
+                    </div>
                 </div>
             </div>
         </div>
