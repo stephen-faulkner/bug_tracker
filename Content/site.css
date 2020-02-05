@@ -168,6 +168,10 @@ textarea {
     display: flex;
 }
 
+.d-none{
+    display: none !important;
+}
+
 .m-auto {
     margin: auto;
 }
@@ -288,4 +292,53 @@ textarea {
 .success-message {
     color: forestgreen;
     font-weight: bold;
+}
+
+.main-menu-header {
+    border-bottom: 1px solid lightgray;
+}
+
+    .main-menu-header a {
+        text-decoration: none;
+    }
+
+.menu-title {
+    width: 100%;
+    padding-left: 5%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    font-weight: bold;
+}
+
+    .menu-title :hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+.menu-submenu {
+    display: flex;
+    padding-left: 15%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    font-weight: bold;
+}
+
+.menu-item {
+    display: flex;
+    padding-left: 15%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    background-color: #aeaeae;
+}
+
+.menu-item span:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.menu-holder{
+    display:none;
 }

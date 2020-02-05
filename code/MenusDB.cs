@@ -44,5 +44,15 @@ namespace bug_tracker.code
 
             return pages;
         }
+
+        public static bug_tracker_page GetMenuHeaderPage(int menu_id)
+        {
+            bug_tracker_page page = (from _page in bug_tracker.bug_tracker_pages
+                                     join _menu in bug_tracker.bug_tracker_menu_pages on _page.id equals _menu.page_id
+                                     where _menu.menu_id == menu_id
+                                     select _page).FirstOrDefault();
+
+            return page;
+        }
     }
 }

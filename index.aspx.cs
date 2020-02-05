@@ -17,6 +17,8 @@ namespace bug_tracker
         private WebFunctions wFunctions = new WebFunctions();
         protected void Page_Load(object sender, EventArgs e)
         {
+            wFunctions.LogInUserFromCookie();
+
             if (!IsPostBack)
             {
                 if (Session["username"] != null)
@@ -36,7 +38,7 @@ namespace bug_tracker
 
             if (!success)
             {
-                lblMessage.BackColor = Color.Red;
+                lblMessage.ForeColor = Color.Red;
                 lblMessage.Text = "Username and/or Password not found.";
             }
             else

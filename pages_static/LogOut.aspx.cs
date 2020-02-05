@@ -12,6 +12,9 @@ namespace bug_tracker.pages_static
         protected void Page_Load(object sender, EventArgs e)
         {
             Session.Abandon();
+            HttpCookie user_data = Request.Cookies["user_data"];
+            user_data.Expires = DateTime.Today.AddDays(-1);
+            Response.Cookies.Add(user_data);
             Response.Redirect("/index.aspx");
         }
     }

@@ -62,20 +62,35 @@ namespace bug_tracker.code
 
             try
             {
-                sbMenu.Append("<div class='d-block'>");
+                sbMenu.Append("<div class='d-block main-menu'>");
 
                 foreach(bug_tracker_menu_header menu_header in MenusDB.GetMenu())
                 {
-                    sbMenu.AppendFormat("<div>{0}</div>", menu_header.menu_title);
-                    sbMenu.Append(BuildSubMenus(menu_header));
-                    sbMenu.Append(BuildMenuPages(menu_header));
+                    sbMenu.Append("<div class='main-menu-header'>");
+
+                    if (menu_header.has_submenu == true)
+                    {
+                        sbMenu.AppendFormat("<a class='d-flex menu-title' data-sub='{0}'>", menu_header.id);
+                        sbMenu.Append("<i class='material-icons menu-right'>keyboard_arrow_right</i>");
+                        sbMenu.Append("<i class='material-icons menu-down' style='display:none;'>keyboard_arrow_down</i>");
+                        sbMenu.AppendFormat("<span>{0}</span>", menu_header.menu_title);
+                        sbMenu.Append("</a>");
+
+                        sbMenu.Append(BuildSubMenus(menu_header));
+                        sbMenu.Append(BuildMenuPages(menu_header));
+                    }
+                    else
+                        sbMenu.AppendFormat("<a href='{0}' class='d-flex menu-title'><i class='material-icons'>keyboard_arrow_right</i><span>{1}</span></a>", MenusDB.GetMenuHeaderPage(menu_header.id).page_url, menu_header.menu_title);
+
+
+                    sbMenu.Append("</div>");
                 }
 
                 sbMenu.Append("</div>");
             }
             catch(Exception ex)
             {
-
+                LogsDB.AddLog("Error building main side menu", LogsDB.GetLogType("error").id, ex);
             }
 
             ltlMenu.Text = sbMenu.ToString();
@@ -85,14 +100,32 @@ namespace bug_tracker.code
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach(bug_tracker_menu_header sub_menu in MenusDB.GetSubMenus(menu_item.id))
+            List<bug_tracker_menu_header> sub_menus = MenusDB.GetSubMenus(menu_item.id);
+
+            if(sub_menus.Count > 0)
             {
-                sb.Append("<div class='d-block'>");
+                sb.Append("<div class='menu-holder'>");
 
-                sb.AppendFormat("<span>{0}</span>", sub_menu.menu_title);
+                foreach (bug_tracker_menu_header sub_menu in MenusDB.GetSubMenus(menu_item.id))
+                {
+                    sb.Append("<div class='menu-submenu'>");
 
-                sb.Append(BuildSubMenus(sub_menu));
-                sb.Append(BuildMenuPages(sub_menu));
+                    if(sub_menu.has_submenu == true)
+                    {
+                        sb.AppendFormat("<a class='d-flex menu-title' data-sub='{0}'>", sub_menu.id);
+                        sb.Append("<i class='material-icons menu-right'>keyboard_arrow_right</i>");
+                        sb.Append("<i class='material-icons menu-down' style='display:none;'>keyboard_arrow_down</i>");
+                        sb.AppendFormat("<span>{0}</span>",sub_menu.menu_title);
+                        sb.Append("</a>");
+
+                        sb.Append(BuildSubMenus(sub_menu));
+                        sb.Append(BuildMenuPages(sub_menu));
+                    }
+                    else
+                        sb.AppendFormat("<div class='d-flex'><a href='{0}' class='d-flex menu-title'><i class='material-icons'>keyboard_arrow_right</i><span>{1}</span></a></div>", MenusDB.GetMenuHeaderPage(sub_menu.id).page_url, sub_menu.menu_title);
+
+                    sb.Append("</div>");
+                }
 
                 sb.Append("</div>");
             }
@@ -104,11 +137,20 @@ namespace bug_tracker.code
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach(bug_tracker_page page in MenusDB.GetMenuPages(menu_item.id))
-            {
-                sb.Append("<div class='d-block'>");
+            List< bug_tracker_page > pages = MenusDB.GetMenuPages(menu_item.id);
 
-                sb.AppendFormat("<span>{0}</span>", page.name);
+            if(pages.Count > 0)
+            {
+                sb.Append("<div class='menu-holder'>");
+
+                foreach (bug_tracker_page page in MenusDB.GetMenuPages(menu_item.id))
+                {
+                    sb.Append("<div class='menu-item'>");
+
+                    sb.AppendFormat("<a href='{0}' class='d-flex menu-title'><span>{1}<span></a>", page.page_url, page.name);
+
+                    sb.Append("</div>");
+                }
 
                 sb.Append("</div>");
             }
