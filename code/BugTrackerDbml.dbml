@@ -116,4 +116,22 @@
       <Association Name="ticket_ticket_attachment" Member="ticket" ThisKey="ticket_id" OtherKey="id" Type="ticket" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.bug_tracker_menu_roles" Member="bug_tracker_menu_roles">
+    <Type Name="bug_tracker_menu_role">
+      <Column Name="menu_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="role_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bug_tracker_pages_roles" Member="bug_tracker_pages_roles">
+    <Type Name="bug_tracker_pages_role">
+      <Column Name="page_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="role_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bug_tracker_roles_id" Member="bug_tracker_roles_ids">
+    <Type Name="bug_tracker_roles_id">
+      <Column Name="role_id" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="page_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

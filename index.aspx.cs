@@ -49,6 +49,8 @@ namespace bug_tracker
                 if (chkRememberMe.Checked)
                     wFunctions.SetUserCookie(user);
 
+                wFunctions.SetLoginType(user);
+
                 Response.Redirect("/pages_dynamic/home.aspx");
             }
         }
@@ -75,6 +77,7 @@ namespace bug_tracker
             }
 
             wFunctions.SetUserSessionVars(user);
+            wFunctions.SetLoginType(user);
             Response.Redirect("/pages_dynamic/home.aspx");
         }
     }

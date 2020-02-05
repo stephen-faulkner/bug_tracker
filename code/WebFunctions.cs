@@ -184,5 +184,24 @@ namespace bug_tracker.code
                 SetUserSessionVars(Membership.GetUser(user_data["username"]));
             }
         }
+
+        public void SetLoginType(MembershipUser user)
+        {
+            object ltype;
+            using (SqlConnection sqlCon = new SqlConnection(GetConnectionString()))
+            {
+                sqlCon.Open();
+                using(SqlCommand sqlCmd = new SqlCommand("", sqlCon))
+                {
+                    sqlCmd.CommandText = "SELECT login_type from bug_tracker_roles_id left outer join aspnet_Roles on role_id = RoleId where RoleName = @role";
+                    sqlCmd.Parameters.AddWithValue("@role", HttpContext.Current.Session["role"]);
+
+                    ltype = sqlCmd.ExecuteScalar();
+                }
+                sqlCon.Close();
+            }
+
+            HttpContext.Current.Session["login_type"] = ltype;
+        }
     }
 }

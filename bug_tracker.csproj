@@ -170,7 +170,7 @@
     <Content Include="pages_dynamic\Tickets\tickets_create.aspx" />
     <Content Include="pages_static\change_password.aspx" />
     <Content Include="pages_static\LogOut.aspx" />
-    <Content Include="pages_static\new_user.aspx" />
+    <Content Include="pages_dynamic\Users\new_user.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -300,11 +300,11 @@
     <Compile Include="pages_static\LogOut.aspx.designer.cs">
       <DependentUpon>LogOut.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pages_static\new_user.aspx.cs">
+    <Compile Include="pages_dynamic\Users\new_user.aspx.cs">
       <DependentUpon>new_user.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pages_static\new_user.aspx.designer.cs">
+    <Compile Include="pages_dynamic\Users\new_user.aspx.designer.cs">
       <DependentUpon>new_user.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

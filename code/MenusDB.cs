@@ -16,6 +16,8 @@ namespace bug_tracker.code
             List<bug_tracker_menu_header> menu = new List<bug_tracker_menu_header>();
 
             menu = (from _menus in bug_tracker.bug_tracker_menu_headers
+                    join _menu_roles in bug_tracker.bug_tracker_menu_roles on _menus.id equals _menu_roles.menu_id
+                    where _menu_roles.role_id == Convert.ToInt64(HttpContext.Current.Session["login_type"])
                     select _menus).Distinct().ToList();
 
             return menu;
@@ -27,7 +29,8 @@ namespace bug_tracker.code
 
             submenus = (from _submenus in bug_tracker.bug_tracker_menu_headers
                         join _menus in bug_tracker.bug_tracker_menu_submenus on _submenus.id equals _menus.submenu_id
-                        where _menus.menu_header_id == menu_id
+                        join _menu_role in bug_tracker.bug_tracker_menu_roles on _submenus.id  equals _menu_role.menu_id
+                        where _menus.menu_header_id == menu_id && _menu_role.role_id == Convert.ToInt64(HttpContext.Current.Session["login_type"])
                         select _submenus).Distinct().ToList();
 
             return submenus;
@@ -39,7 +42,8 @@ namespace bug_tracker.code
 
             pages = (from _pages in bug_tracker.bug_tracker_pages
                      join _menu in bug_tracker.bug_tracker_menu_pages on _pages.id equals _menu.page_id
-                     where _menu.menu_id == menu_id
+                     join _page_roles in bug_tracker.bug_tracker_pages_roles on _pages.id equals _page_roles.page_id
+                     where _menu.menu_id == menu_id && _page_roles.role_id == Convert.ToInt64(HttpContext.Current.Session["login_type"])
                      select _pages).Distinct().ToList();
 
             return pages;

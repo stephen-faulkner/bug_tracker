@@ -190,6 +190,30 @@ namespace bug_tracker.code
 				return this.GetTable<ticket_attachment>();
 			}
 		}
+		
+		public System.Data.Linq.Table<bug_tracker_menu_role> bug_tracker_menu_roles
+		{
+			get
+			{
+				return this.GetTable<bug_tracker_menu_role>();
+			}
+		}
+		
+		public System.Data.Linq.Table<bug_tracker_pages_role> bug_tracker_pages_roles
+		{
+			get
+			{
+				return this.GetTable<bug_tracker_pages_role>();
+			}
+		}
+		
+		public System.Data.Linq.Table<bug_tracker_roles_id> bug_tracker_roles_ids
+		{
+			get
+			{
+				return this.GetTable<bug_tracker_roles_id>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.projects")]
@@ -2286,6 +2310,141 @@ namespace bug_tracker.code
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.bug_tracker_menu_roles")]
+	public partial class bug_tracker_menu_role
+	{
+		
+		private System.Nullable<long> _menu_id;
+		
+		private System.Nullable<long> _role_id;
+		
+		public bug_tracker_menu_role()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_menu_id", DbType="BigInt")]
+		public System.Nullable<long> menu_id
+		{
+			get
+			{
+				return this._menu_id;
+			}
+			set
+			{
+				if ((this._menu_id != value))
+				{
+					this._menu_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_id", DbType="BigInt")]
+		public System.Nullable<long> role_id
+		{
+			get
+			{
+				return this._role_id;
+			}
+			set
+			{
+				if ((this._role_id != value))
+				{
+					this._role_id = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.bug_tracker_pages_roles")]
+	public partial class bug_tracker_pages_role
+	{
+		
+		private System.Nullable<long> _page_id;
+		
+		private System.Nullable<long> _role_id;
+		
+		public bug_tracker_pages_role()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_page_id", DbType="BigInt")]
+		public System.Nullable<long> page_id
+		{
+			get
+			{
+				return this._page_id;
+			}
+			set
+			{
+				if ((this._page_id != value))
+				{
+					this._page_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_id", DbType="BigInt")]
+		public System.Nullable<long> role_id
+		{
+			get
+			{
+				return this._role_id;
+			}
+			set
+			{
+				if ((this._role_id != value))
+				{
+					this._role_id = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.bug_tracker_roles_id")]
+	public partial class bug_tracker_roles_id
+	{
+		
+		private string _role_id;
+		
+		private System.Nullable<long> _page_id;
+		
+		public bug_tracker_roles_id()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_role_id", DbType="NVarChar(MAX)")]
+		public string role_id
+		{
+			get
+			{
+				return this._role_id;
+			}
+			set
+			{
+				if ((this._role_id != value))
+				{
+					this._role_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_page_id", DbType="BigInt")]
+		public System.Nullable<long> page_id
+		{
+			get
+			{
+				return this._page_id;
+			}
+			set
+			{
+				if ((this._page_id != value))
+				{
+					this._page_id = value;
+				}
 			}
 		}
 	}

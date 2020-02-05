@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 15.75, 8.5" name="BugTrackerDbml">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 16, 8.5" name="BugTrackerDbml">
   <DataContextMoniker Name="/BugTrackerDbmlDataContext" />
   <nestedChildShapes>
     <classShape Id="0b8910aa-0f55-402a-92f2-8adc08161b6a" absoluteBounds="3.5, 5.5, 2, 1.9631982421875005">
@@ -46,14 +46,14 @@
         <elementListCompartment Id="88b1f9b2-a582-4dcf-9cbc-d99fc998cdb5" absoluteBounds="10.64, 2.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(11.5625 : 2.07859537760417); (11.5625 : 2.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11.5625 : 2.07859537760417); (11.5625 : 2.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/BugTrackerDbmlDataContext/bug_tracker_menu_header/bug_tracker_menu_header_bug_tracker_menu_submenus" />
       <nodes>
         <classShapeMoniker Id="04196a74-2255-41f7-88d6-67f9bcd5a741" />
         <classShapeMoniker Id="bffc04c2-639c-4765-83bd-b918da0b877b" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(12.09375 : 2.07859537760417); (12.09375 : 2.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(12.09375 : 2.07859537760417); (12.09375 : 2.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/BugTrackerDbmlDataContext/bug_tracker_menu_header/bug_tracker_menu_header_bug_tracker_menu_submenus1" />
       <nodes>
         <classShapeMoniker Id="04196a74-2255-41f7-88d6-67f9bcd5a741" />
@@ -72,19 +72,19 @@
         <elementListCompartment Id="8bbf105a-181b-461d-87f4-971d2ddb6b79" absoluteBounds="3.5149999999999997, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="39efabbf-97f3-4921-8961-ca250b4e8a53" absoluteBounds="13.5, 5, 2, 1.1939925130208333">
+    <classShape Id="39efabbf-97f3-4921-8961-ca250b4e8a53" absoluteBounds="13.75, 5.75, 2, 1.1939925130208333">
       <DataClassMoniker Name="/BugTrackerDbmlDataContext/log_type" />
       <nestedChildShapes>
-        <elementListCompartment Id="3bedd870-d39d-4ed0-bcaa-15ba779eea94" absoluteBounds="13.515, 5.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3bedd870-d39d-4ed0-bcaa-15ba779eea94" absoluteBounds="13.765, 6.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ab5e6b98-0e7c-4a14-9926-22f95ea13a2b" absoluteBounds="10.5, 4.875, 2, 2.3478011067708335">
+    <classShape Id="ab5e6b98-0e7c-4a14-9926-22f95ea13a2b" absoluteBounds="10.875, 5.5, 2, 2.3478011067708335">
       <DataClassMoniker Name="/BugTrackerDbmlDataContext/log" />
       <nestedChildShapes>
-        <elementListCompartment Id="9aeed92e-4529-4032-a3d4-df8301c7ea94" absoluteBounds="10.515, 5.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9aeed92e-4529-4032-a3d4-df8301c7ea94" absoluteBounds="10.89, 5.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(13.5 : 5.59699625651042); (12.5 : 5.59699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(13.75 : 6.34699625651042); (12.875 : 6.34699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/BugTrackerDbmlDataContext/log_type/log_type_log" />
       <nodes>
         <classShapeMoniker Id="39efabbf-97f3-4921-8961-ca250b4e8a53" />
@@ -97,7 +97,7 @@
         <elementListCompartment Id="1edaa0b6-83ff-49f6-8014-791da49f12b8" absoluteBounds="0.64000000000000012, 1.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.5 : 4.47199625651042); (1.625 : 4.47199625651042); (1.625 : 3.15549967447917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.5 : 4.47199625651042); (1.625 : 4.47199625651042); (1.625 : 3.15549967447917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/BugTrackerDbmlDataContext/ticket_priority/ticket_priority_ticket" />
       <nodes>
         <classShapeMoniker Id="8a89e2a9-96f2-4ec2-acb6-feed23043ef7" />
@@ -117,7 +117,7 @@
         <elementListCompartment Id="921add16-ddfe-4c12-98cf-7349ceb125c3" absoluteBounds="3.515, 2.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.625 : 2.51524983723958); (3.5 : 2.51524983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.625 : 2.51524983723958); (3.5 : 2.51524983723958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/BugTrackerDbmlDataContext/ticket/ticket_note" />
       <nodes>
         <classShapeMoniker Id="e154077d-938c-4da0-a0d4-e89b33b210c7" />
@@ -137,5 +137,23 @@
         <classShapeMoniker Id="3f2872cb-e800-45ce-a815-7201832b683a" />
       </nodes>
     </associationConnector>
+    <classShape Id="92fd3dae-601c-4668-af2b-aad60429b4b4" absoluteBounds="8.25, 0.5, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/BugTrackerDbmlDataContext/bug_tracker_menu_role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2efaca4d-9468-4b85-9aa4-dcd055ce4387" absoluteBounds="8.265, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e4baaf5e-c832-4b42-b312-a8bcdea10ab9" absoluteBounds="10.75, 3.625, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/BugTrackerDbmlDataContext/bug_tracker_pages_role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e293c45d-076f-418e-b340-11693d2ec7ef" absoluteBounds="10.765, 4.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5ee0fc93-33ef-4d3a-a10f-8110660234d4" absoluteBounds="8.125, 3.625, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/BugTrackerDbmlDataContext/bug_tracker_roles_id" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cdbaec18-41e6-4477-803c-e7587c84c9c9" absoluteBounds="8.14, 4.0850000000000009, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
