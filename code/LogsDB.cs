@@ -141,7 +141,7 @@ namespace bug_tracker.code
         public static log_type GetLogType(string this_log_type)
         {
             log_type type = (from log_types in bug_tracker.log_types
-                             where log_types.log_type1.ToLower(CultureInfo.CurrentCulture) == this_log_type.ToLower(CultureInfo.CurrentCulture)
+                             where log_types.log_type1.ToLower() == this_log_type.ToLower()
                              select log_types).FirstOrDefault();
 
             return type;

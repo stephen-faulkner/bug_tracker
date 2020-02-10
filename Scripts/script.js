@@ -1,6 +1,6 @@
-﻿$(document).ready(function () {
-    console.log(window.location);
-});
+﻿//$(document).ready(function () {
+//    console.log(window.location);
+//});
 
 function SetFocus(input) {
     $("#" + input).select();
@@ -24,4 +24,65 @@ $(".menu-title").click(function () {
 
         $(this).siblings().slideDown();
     }    
+});
+
+$(".ResetUserPassowrd").click(function () {
+    var user_id = $(this).data("userid");
+
+    $.ajax({
+        url: "/pages_dynamic/users/view_all_users.aspx/ResetPassword",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: "{'user_id': '" + user_id + "'}",
+        success: function (response) {
+            var success = response.d;
+            if (success) {
+                alert("Password reset email sent");
+            }
+            else {
+                alert("Error resetting password");
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(XMLHttpRequest);
+            console.log(textStatus);
+            console.log(errorThrown);
+            alert(response.d);
+        },
+        failure: function (response) {
+            alert(response.d);
+        }
+    });
+});
+
+$(".UnlockUser").click(function () {
+    var user_id = $(this).data("userid");
+    var btn = $(this);
+
+    $.ajax({
+        url: "/pages_dynamic/users/view_all_users.aspx/UnlockAccount",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: "{'user_id': '" + user_id + "'}",
+        success: function (response) {
+            var success = response.d;
+            if (success) {
+                $(btn).remove();
+            }
+            else {
+                alert("Error unlocking account");
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(XMLHttpRequest);
+            console.log(textStatus);
+            console.log(errorThrown);
+            alert(response.d);
+        },
+        failure: function (response) {
+            alert(response.d);
+        }
+    });
 });

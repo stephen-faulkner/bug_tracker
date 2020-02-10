@@ -342,3 +342,7 @@ textarea {
 .menu-holder{
     display:none;
 }
+
+.back-white{
+    background-color: white;
+}

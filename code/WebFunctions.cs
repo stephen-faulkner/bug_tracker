@@ -10,6 +10,7 @@ using System.Net.Mail;
 using System.Web.Security;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Web.UI;
 
 namespace bug_tracker.code
 {
@@ -61,7 +62,7 @@ namespace bug_tracker.code
             StringBuilder sbMenu = new StringBuilder();
 
             try
-            {
+            {                
                 sbMenu.Append("<div class='d-block main-menu'>");
 
                 foreach(bug_tracker_menu_header menu_header in MenusDB.GetMenu())
@@ -162,7 +163,8 @@ namespace bug_tracker.code
         {
             HttpContext.Current.Session["username"] = user.UserName;
             HttpContext.Current.Session["userid"] = user.ProviderUserKey.ToString();
-            HttpContext.Current.Session["role"] = Roles.GetRolesForUser(user.UserName)[0];            
+            HttpContext.Current.Session["role"] = Roles.GetRolesForUser(user.UserName)[0];
+            SetLoginType(user);
         }
 
         public void SetUserCookie(MembershipUser user)
@@ -202,6 +204,19 @@ namespace bug_tracker.code
             }
 
             HttpContext.Current.Session["login_type"] = ltype;
+        }
+
+        public void SendNewUserEmail(string username, string tempPword, string to_email)
+        {
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(ConfigurationManager.AppSettings["EmailDefaultFrom"]);
+            mail.To.Add(to_email);
+
+            mail.Subject = "Bug Tracker User Account Created";
+
+            mail.Body = String.Format("You have had an account created for the bug tracker. Your username is {0}, your password is {1}", username, tempPword);
+
+            SendEmail(mail);
         }
     }
 }

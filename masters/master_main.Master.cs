@@ -14,7 +14,7 @@ namespace bug_tracker.masters
     {
         private WebFunctions wFunctions = new WebFunctions();
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Init(object sender, EventArgs e)
         {
             wFunctions.LogInUserFromCookie();
             if (Session["username"] == null)
@@ -25,8 +25,12 @@ namespace bug_tracker.masters
             if (!IsPostBack)
             {
                 wFunctions.BuildMenu(ltlMenu);
-                
             }
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

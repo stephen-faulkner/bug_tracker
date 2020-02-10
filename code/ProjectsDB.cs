@@ -67,7 +67,7 @@ namespace bug_tracker.code
                     _project.description = project.description;
                     _project.status = project.status;
                     _project.created_date = DateTime.Now;
-                    _project.created_by = Convert.ToInt64(HttpContext.Current.Session["user_id"]);
+                    _project.created_by = new Guid(HttpContext.Current.Session["user_id"].ToString());
 
                     bug_tracker.projects.InsertOnSubmit(_project);
                 }
@@ -88,6 +88,45 @@ namespace bug_tracker.code
             }
 
             return _project;
+        }
+
+        public static List<projects_all_detail> GetAllProjectsDetails()
+        {
+            List<projects_all_detail> all_Details = (from projects in bug_tracker.projects_all_details
+                                                     orderby projects.name
+                                                     select projects).Distinct().ToList();
+
+            return all_Details;
+        }
+
+        public static List<projects_all_detail> GetAllProjectsDetails(Guid user_id)
+        {
+            List<projects_all_detail> all_details = (from projects in bug_tracker.projects_all_details
+                                                     join projects_user in bug_tracker.projects_users on projects.project_id equals projects_user.project_id
+                                                     where projects_user.user_id == user_id
+                                                     select projects).Distinct().ToList();
+
+            return all_details;
+        }
+
+        public static List<projects_all_detail> GetActiveProjectsDetails()
+        {
+            List<projects_all_detail> all_Details = (from projects in bug_tracker.projects_all_details
+                                                     where projects.active == true
+                                                     orderby projects.name
+                                                     select projects).Distinct().ToList();
+
+            return all_Details;
+        }
+
+        public static List<projects_all_detail> GetActiveProjectsDetails(Guid user_id)
+        {
+            List<projects_all_detail> all_details = (from projects in bug_tracker.projects_all_details
+                                                     join projects_user in bug_tracker.projects_users on projects.project_id equals projects_user.project_id
+                                                     where projects_user.user_id == user_id && projects.active == true
+                                                     select projects).Distinct().ToList();
+
+            return all_details;
         }
     }
 }

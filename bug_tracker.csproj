@@ -167,7 +167,10 @@
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="pages_dynamic\home.aspx" />
     <Content Include="pages_dynamic\Projects\projects_add.aspx" />
+    <Content Include="pages_dynamic\Projects\projects_all.aspx" />
+    <Content Include="pages_dynamic\Projects\projects_edit.aspx" />
     <Content Include="pages_dynamic\Tickets\tickets_create.aspx" />
+    <Content Include="pages_dynamic\Users\view_all_users.aspx" />
     <Content Include="pages_static\change_password.aspx" />
     <Content Include="pages_static\LogOut.aspx" />
     <Content Include="pages_dynamic\Users\new_user.aspx" />
@@ -279,12 +282,33 @@
     <Compile Include="pages_dynamic\Projects\projects_add.aspx.designer.cs">
       <DependentUpon>projects_add.aspx</DependentUpon>
     </Compile>
+    <Compile Include="pages_dynamic\Projects\projects_all.aspx.cs">
+      <DependentUpon>projects_all.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages_dynamic\Projects\projects_all.aspx.designer.cs">
+      <DependentUpon>projects_all.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages_dynamic\Projects\projects_edit.aspx.cs">
+      <DependentUpon>projects_edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages_dynamic\Projects\projects_edit.aspx.designer.cs">
+      <DependentUpon>projects_edit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages_dynamic\Tickets\tickets_create.aspx.cs">
       <DependentUpon>tickets_create.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="pages_dynamic\Tickets\tickets_create.aspx.designer.cs">
       <DependentUpon>tickets_create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages_dynamic\Users\view_all_users.aspx.cs">
+      <DependentUpon>view_all_users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages_dynamic\Users\view_all_users.aspx.designer.cs">
+      <DependentUpon>view_all_users.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages_static\change_password.aspx.cs">
       <DependentUpon>change_password.aspx</DependentUpon>

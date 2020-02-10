@@ -67,7 +67,7 @@ namespace bug_tracker.pages_static
             {
                 case MembershipCreateStatus.Success:
                     Roles.AddUserToRole(String.Format("{0} {1}", txtFirstName.Text, txtLastName.Text), ddlUserType.SelectedValue);
-                    SendNewUserEmail(String.Format("{0} {1}", txtFirstName.Text, txtLastName.Text), tempPword);
+                    wf.SendNewUserEmail(String.Format("{0} {1}", txtFirstName.Text, txtLastName.Text), tempPword, txtNewUserEmail.Text);
                     lblMessage.ForeColor = Color.Green;
                     lblMessage.Text = "The user account has been created. An email will be sent to the user shortly.";
                     ClearInputs();
@@ -91,19 +91,6 @@ namespace bug_tracker.pages_static
                     lblMessage.Text = "An unexpected error occurred.";
                     break;
             }
-        }
-
-        protected void SendNewUserEmail(string username, string tempPword)
-        {
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(ConfigurationManager.AppSettings["EmailDefaultFrom"]);
-            mail.To.Add(txtNewUserEmail.Text);
-
-            mail.Subject = "Bug Tracker User Account Created";
-
-            mail.Body = String.Format("You have had an account created for the bug tracker. Your username is {0}, your password is {1}", username, tempPword);
-
-            wf.SendEmail(mail);
         }
 
         private void ClearInputs()
