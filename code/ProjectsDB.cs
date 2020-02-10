@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Data.Linq;
 using System.Globalization;
+using System.Web.Security;
 
 namespace bug_tracker.code
 {
@@ -90,18 +91,18 @@ namespace bug_tracker.code
             return _project;
         }
 
-        public static List<projects_all_detail> GetAllProjectsDetails()
+        public static List<projects_tickets_detail> GetAllProjectsDetails()
         {
-            List<projects_all_detail> all_Details = (from projects in bug_tracker.projects_all_details
+            List<projects_tickets_detail> all_Details = (from projects in bug_tracker.projects_tickets_details
                                                      orderby projects.name
                                                      select projects).Distinct().ToList();
 
             return all_Details;
         }
 
-        public static List<projects_all_detail> GetAllProjectsDetails(Guid user_id)
+        public static List<projects_tickets_detail> GetAllProjectsDetails(Guid user_id)
         {
-            List<projects_all_detail> all_details = (from projects in bug_tracker.projects_all_details
+            List<projects_tickets_detail> all_details = (from projects in bug_tracker.projects_tickets_details
                                                      join projects_user in bug_tracker.projects_users on projects.project_id equals projects_user.project_id
                                                      where projects_user.user_id == user_id
                                                      select projects).Distinct().ToList();
@@ -109,9 +110,9 @@ namespace bug_tracker.code
             return all_details;
         }
 
-        public static List<projects_all_detail> GetActiveProjectsDetails()
+        public static List<projects_tickets_detail> GetActiveProjectsDetails()
         {
-            List<projects_all_detail> all_Details = (from projects in bug_tracker.projects_all_details
+            List<projects_tickets_detail> all_Details = (from projects in bug_tracker.projects_tickets_details
                                                      where projects.active == true
                                                      orderby projects.name
                                                      select projects).Distinct().ToList();
@@ -119,14 +120,73 @@ namespace bug_tracker.code
             return all_Details;
         }
 
-        public static List<projects_all_detail> GetActiveProjectsDetails(Guid user_id)
+        public static List<projects_tickets_detail> GetActiveProjectsDetails(Guid user_id)
         {
-            List<projects_all_detail> all_details = (from projects in bug_tracker.projects_all_details
+            List<projects_tickets_detail> all_details = (from projects in bug_tracker.projects_tickets_details
                                                      join projects_user in bug_tracker.projects_users on projects.project_id equals projects_user.project_id
                                                      where projects_user.user_id == user_id && projects.active == true
                                                      select projects).Distinct().ToList();
 
             return all_details;
+        }
+
+        public static List<MembershipUser> GetProjectUsers(project this_project)
+        {
+            List<MembershipUser> users = new List<MembershipUser>();
+            List<projects_user> project_users = (from project_user in bug_tracker.projects_users
+                                                 join user in bug_tracker.aspnet_Users on project_user.user_id equals user.UserId
+                                                 join user_role in bug_tracker.aspnet_UsersInRoles on user.UserId equals user_role.UserId
+                                                 join roles in bug_tracker.aspnet_Roles on user_role.RoleId equals roles.RoleId
+                                                 where project_user.project_id == this_project.id && roles.RoleName == "User"
+                                                 select project_user).Distinct().ToList();
+
+            foreach (projects_user user in project_users)
+                users.Add(Membership.GetUser(user.user_id));
+
+            return users;
+        }
+
+        public static List<MembershipUser> GetProjectDevs(project this_project)
+        {
+            List<MembershipUser> devs = new List<MembershipUser>();
+            List<projects_user> project_devs = (from project_user in bug_tracker.projects_users
+                                                 join user in bug_tracker.aspnet_Users on project_user.user_id equals user.UserId
+                                                 join user_role in bug_tracker.aspnet_UsersInRoles on user.UserId equals user_role.UserId
+                                                 join roles in bug_tracker.aspnet_Roles on user_role.RoleId equals roles.RoleId
+                                                 where project_user.project_id == this_project.id && roles.RoleName == "Developer"
+                                                select project_user).Distinct().ToList();
+
+            foreach (projects_user dev in project_devs)
+                devs.Add(Membership.GetUser(dev.user_id));
+
+            return devs;
+        }
+
+
+
+        public static List<MembershipUser> GetProjectManagers(project this_project)
+        {
+            List<MembershipUser> managers = new List<MembershipUser>();
+            List<projects_user> project_managers = (from project_user in bug_tracker.projects_users
+                                                join user in bug_tracker.aspnet_Users on project_user.user_id equals user.UserId
+                                                join user_role in bug_tracker.aspnet_UsersInRoles on user.UserId equals user_role.UserId
+                                                join roles in bug_tracker.aspnet_Roles on user_role.RoleId equals roles.RoleId
+                                                where project_user.project_id == this_project.id && roles.RoleName == "Project Manager"
+                                                select project_user).Distinct().ToList();
+
+            foreach (projects_user manager in project_managers)
+                managers.Add(Membership.GetUser(manager.user_id));
+
+            return managers;
+        }
+
+        public static List<project_detail> GetProjectTickets(project this_project)
+        {
+            List<project_detail> project_tickets = (from pt in bug_tracker.project_details
+                                                             where pt.project_id == this_project.id
+                                                             select pt).Distinct().ToList();
+
+            return project_tickets;
         }
     }
 }

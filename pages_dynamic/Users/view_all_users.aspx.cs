@@ -100,7 +100,10 @@ namespace bug_tracker.pages_dynamic.Users
             try
             {
                 MembershipUser user = Membership.GetUser(user_id);
-                wf.SendNewUserEmail(user.UserName, Membership.GeneratePassword(8, 2), user.Email);
+
+                /*NOT AVAILABLE FOR DEMO*/
+                /*UNCOMMENT WHEN EMAIL SETTINGS ARE READY*/
+                //wf.SendNewUserEmail(user.UserName, Membership.GeneratePassword(8, 2), user.Email);
 
                 password_reset = true;
             }

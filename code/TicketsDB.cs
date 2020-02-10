@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 using System.Web;
-using System.Data.Linq;
-using System.Data.SqlClient;
+using System.Web.Security;
 
 namespace bug_tracker.code
 {
@@ -21,7 +21,7 @@ namespace bug_tracker.code
                           where _ticket.id == ticketID
                           select _ticket).FirstOrDefault();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -72,7 +72,7 @@ namespace bug_tracker.code
 
             try
             {
-                if(ticket.id != 0)
+                if (ticket.id != 0)
                 {
                     _ticket = (from tickets in bug_tracker.tickets
                                where tickets.id == ticket.id
@@ -86,7 +86,7 @@ namespace bug_tracker.code
                 {
                     _ticket = new ticket();
                     _ticket.created_date = DateTime.Now;
-                    _ticket.created_by = HttpContext.Current.Session["userid"].ToString();
+                    _ticket.created_by = new Guid(HttpContext.Current.Session["userid"].ToString());
                     _ticket.title = ticket.title;
                     _ticket.description = ticket.description;
                     _ticket.status = ticket.status;
@@ -97,7 +97,7 @@ namespace bug_tracker.code
 
                 bug_tracker.SubmitChanges(ConflictMode.ContinueOnConflict);
             }
-            catch(ChangeConflictException ex)
+            catch (ChangeConflictException ex)
             {
                 foreach (ObjectChangeConflict objConflict in bug_tracker.ChangeConflicts)
                     foreach (MemberChangeConflict memberChange in objConflict.MemberConflicts)
@@ -113,7 +113,7 @@ namespace bug_tracker.code
             return _ticket;
         }
 
-        public void AddTicketNote(string this_note, ticket this_ticket)
+        public static void AddTicketNote(string this_note, ticket this_ticket)
         {
             try
             {
@@ -141,11 +141,38 @@ namespace bug_tracker.code
             {
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogsDB.AddLog("Error adding note to ticket. Note = {0}", LogsDB.GetLogType("error").id, this_ticket.id, ex);
             }
-            
+
+        }
+
+        public static Int32 GetDevProjectTicketCount(project this_project, MembershipUser dev)
+        {
+            Int32 ticket_count = 0;
+
+            ticket_count = (from tickets in bug_tracker.tickets
+                            where tickets.project_id == this_project.id && tickets.dev_id == new Guid(dev.ProviderUserKey.ToString())
+                            select tickets).Distinct().Count();
+
+            return ticket_count;
+        }
+
+        public static Int32 GetUserProjectTicketCount(project this_project, MembershipUser user)
+        {
+            Int32 ticket_count = 0;
+
+            ticket_count = (from tickets in bug_tracker.tickets
+                            where tickets.project_id == this_project.id && tickets.created_by == new Guid(user.ProviderUserKey.ToString())
+                            select tickets).Distinct().Count();
+
+            return ticket_count;
+        }
+
+        public static string GenerateTicketNumber(ticket this_ticket)
+        {
+            return String.Format("Ticket created with ticket number #{0}", this_ticket.id.ToString().PadLeft(10, '0'));
         }
     }
 }

@@ -53,7 +53,7 @@ namespace bug_tracker.pages_dynamic.Projects
 
             sb.Append("<tbody>");
 
-            foreach(projects_all_detail project in ProjectsDB.GetActiveProjectsDetails())
+            foreach(projects_tickets_detail project in ProjectsDB.GetActiveProjectsDetails())
             {
                 sb.Append("<tr>");
                 sb.AppendFormat("<td><a href='/pages_dynamic/projects/projects_edit.aspx?id={1}'>{0}</a></td>", project.name, project.project_id);

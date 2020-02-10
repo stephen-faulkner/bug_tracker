@@ -59,7 +59,7 @@ namespace bug_tracker.pages_dynamic.Tickets
             string ticket_message = null;
             try
             {
-                new_ticket.created_by = Session["userid"].ToString().Trim();
+                new_ticket.created_by = new Guid(Session["userid"].ToString().Trim());
                 new_ticket.created_date = DateTime.Now;
                 new_ticket.title = txtTicketTitle.Text;
                 new_ticket.description = txtTicketDescr.Text;
@@ -68,7 +68,7 @@ namespace bug_tracker.pages_dynamic.Tickets
 
                 TicketsDB.AddEditTicket(new_ticket);
 
-                ticket_message = String.Format("Ticket created with ticket number #{0}", new_ticket.id.ToString().PadLeft(10, '0'));
+                ticket_message = TicketsDB.GenerateTicketNumber(new_ticket);
             }
             catch(Exception ex)
             {

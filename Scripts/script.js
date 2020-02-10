@@ -38,7 +38,7 @@ $(".ResetUserPassowrd").click(function () {
         success: function (response) {
             var success = response.d;
             if (success) {
-                alert("Password reset email sent");
+                alert("Password has been reset. Email details not set up for demo to send out email.");
             }
             else {
                 alert("Error resetting password");

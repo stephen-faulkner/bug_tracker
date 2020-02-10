@@ -97,6 +97,9 @@ textarea {
     margin-top: 15px;
 }
 
+.m-15-px{
+    margin: 15px;
+}
 
 /*Mobile Screen*/
 @media screen and (max-width: 575.98px) {
@@ -345,4 +348,9 @@ textarea {
 
 .back-white{
     background-color: white;
+}
+
+.table-header{
+    font-weight: bold;
+    text-decoration: underline;
 }

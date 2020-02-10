@@ -15,6 +15,42 @@ namespace bug_tracker.pages_dynamic.Projects
     {
 
         /// <summary>
+        /// ltlTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlTitle;
+
+        /// <summary>
+        /// ltlDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlDescription;
+
+        /// <summary>
+        /// pnlDevs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlDevs;
+
+        /// <summary>
+        /// ltlDevCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlDevCount;
+
+        /// <summary>
         /// ltlDevs control.
         /// </summary>
         /// <remarks>
@@ -24,6 +60,24 @@ namespace bug_tracker.pages_dynamic.Projects
         protected global::System.Web.UI.WebControls.Literal ltlDevs;
 
         /// <summary>
+        /// pnlUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlUsers;
+
+        /// <summary>
+        /// ltlUserCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlUserCount;
+
+        /// <summary>
         /// ltlUsers control.
         /// </summary>
         /// <remarks>
@@ -31,6 +85,24 @@ namespace bug_tracker.pages_dynamic.Projects
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltlUsers;
+
+        /// <summary>
+        /// pnlTickets control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlTickets;
+
+        /// <summary>
+        /// ltlTicketCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlTicketCount;
 
         /// <summary>
         /// ltlTicketsOpen control.

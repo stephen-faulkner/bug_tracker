@@ -51,9 +51,6 @@ namespace bug_tracker.code
     partial void Insertlog(log instance);
     partial void Updatelog(log instance);
     partial void Deletelog(log instance);
-    partial void Insertticket(ticket instance);
-    partial void Updateticket(ticket instance);
-    partial void Deleteticket(ticket instance);
     partial void Insertnote(note instance);
     partial void Updatenote(note instance);
     partial void Deletenote(note instance);
@@ -63,6 +60,18 @@ namespace bug_tracker.code
     partial void Insertproject(project instance);
     partial void Updateproject(project instance);
     partial void Deleteproject(project instance);
+    partial void Insertaspnet_User(aspnet_User instance);
+    partial void Updateaspnet_User(aspnet_User instance);
+    partial void Deleteaspnet_User(aspnet_User instance);
+    partial void Insertaspnet_Role(aspnet_Role instance);
+    partial void Updateaspnet_Role(aspnet_Role instance);
+    partial void Deleteaspnet_Role(aspnet_Role instance);
+    partial void Insertaspnet_UsersInRole(aspnet_UsersInRole instance);
+    partial void Updateaspnet_UsersInRole(aspnet_UsersInRole instance);
+    partial void Deleteaspnet_UsersInRole(aspnet_UsersInRole instance);
+    partial void Insertticket(ticket instance);
+    partial void Updateticket(ticket instance);
+    partial void Deleteticket(ticket instance);
     #endregion
 		
 		public BugTrackerDbmlDataContext() : 
@@ -159,14 +168,6 @@ namespace bug_tracker.code
 			}
 		}
 		
-		public System.Data.Linq.Table<ticket> tickets
-		{
-			get
-			{
-				return this.GetTable<ticket>();
-			}
-		}
-		
 		public System.Data.Linq.Table<note> notes
 		{
 			get
@@ -207,14 +208,6 @@ namespace bug_tracker.code
 			}
 		}
 		
-		public System.Data.Linq.Table<projects_ticket> projects_tickets
-		{
-			get
-			{
-				return this.GetTable<projects_ticket>();
-			}
-		}
-		
 		public System.Data.Linq.Table<projects_user> projects_users
 		{
 			get
@@ -231,11 +224,51 @@ namespace bug_tracker.code
 			}
 		}
 		
-		public System.Data.Linq.Table<projects_all_detail> projects_all_details
+		public System.Data.Linq.Table<aspnet_User> aspnet_Users
 		{
 			get
 			{
-				return this.GetTable<projects_all_detail>();
+				return this.GetTable<aspnet_User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<aspnet_Role> aspnet_Roles
+		{
+			get
+			{
+				return this.GetTable<aspnet_Role>();
+			}
+		}
+		
+		public System.Data.Linq.Table<aspnet_UsersInRole> aspnet_UsersInRoles
+		{
+			get
+			{
+				return this.GetTable<aspnet_UsersInRole>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ticket> tickets
+		{
+			get
+			{
+				return this.GetTable<ticket>();
+			}
+		}
+		
+		public System.Data.Linq.Table<projects_tickets_detail> projects_tickets_details
+		{
+			get
+			{
+				return this.GetTable<projects_tickets_detail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<project_detail> project_details
+		{
+			get
+			{
+				return this.GetTable<project_detail>();
 			}
 		}
 	}
@@ -1462,350 +1495,6 @@ namespace bug_tracker.code
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tickets")]
-	public partial class ticket : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _id;
-		
-		private System.DateTime _created_date;
-		
-		private string _created_by;
-		
-		private string _title;
-		
-		private string _description;
-		
-		private int _status;
-		
-		private int _priority;
-		
-		private EntitySet<note> _notes;
-		
-		private EntitySet<ticket_attachment> _ticket_attachments;
-		
-		private EntityRef<ticket_priority> _ticket_priority;
-		
-		private EntityRef<ticket_status> _ticket_status;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(long value);
-    partial void OnidChanged();
-    partial void Oncreated_dateChanging(System.DateTime value);
-    partial void Oncreated_dateChanged();
-    partial void Oncreated_byChanging(string value);
-    partial void Oncreated_byChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void OndescriptionChanging(string value);
-    partial void OndescriptionChanged();
-    partial void OnstatusChanging(int value);
-    partial void OnstatusChanged();
-    partial void OnpriorityChanging(int value);
-    partial void OnpriorityChanged();
-    #endregion
-		
-		public ticket()
-		{
-			this._notes = new EntitySet<note>(new Action<note>(this.attach_notes), new Action<note>(this.detach_notes));
-			this._ticket_attachments = new EntitySet<ticket_attachment>(new Action<ticket_attachment>(this.attach_ticket_attachments), new Action<ticket_attachment>(this.detach_ticket_attachments));
-			this._ticket_priority = default(EntityRef<ticket_priority>);
-			this._ticket_status = default(EntityRef<ticket_status>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created_date", DbType="DateTime NOT NULL")]
-		public System.DateTime created_date
-		{
-			get
-			{
-				return this._created_date;
-			}
-			set
-			{
-				if ((this._created_date != value))
-				{
-					this.Oncreated_dateChanging(value);
-					this.SendPropertyChanging();
-					this._created_date = value;
-					this.SendPropertyChanged("created_date");
-					this.Oncreated_dateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created_by", DbType="NVarChar(150)")]
-		public string created_by
-		{
-			get
-			{
-				return this._created_by;
-			}
-			set
-			{
-				if ((this._created_by != value))
-				{
-					this.Oncreated_byChanging(value);
-					this.SendPropertyChanging();
-					this._created_by = value;
-					this.SendPropertyChanged("created_by");
-					this.Oncreated_byChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this.OntitleChanging(value);
-					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(MAX)")]
-		public string description
-		{
-			get
-			{
-				return this._description;
-			}
-			set
-			{
-				if ((this._description != value))
-				{
-					this.OndescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._description = value;
-					this.SendPropertyChanged("description");
-					this.OndescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
-		public int status
-		{
-			get
-			{
-				return this._status;
-			}
-			set
-			{
-				if ((this._status != value))
-				{
-					if (this._ticket_status.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnstatusChanging(value);
-					this.SendPropertyChanging();
-					this._status = value;
-					this.SendPropertyChanged("status");
-					this.OnstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_priority", DbType="Int NOT NULL")]
-		public int priority
-		{
-			get
-			{
-				return this._priority;
-			}
-			set
-			{
-				if ((this._priority != value))
-				{
-					if (this._ticket_priority.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnpriorityChanging(value);
-					this.SendPropertyChanging();
-					this._priority = value;
-					this.SendPropertyChanged("priority");
-					this.OnpriorityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ticket_note", Storage="_notes", ThisKey="id", OtherKey="ticket_id")]
-		public EntitySet<note> notes
-		{
-			get
-			{
-				return this._notes;
-			}
-			set
-			{
-				this._notes.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ticket_ticket_attachment", Storage="_ticket_attachments", ThisKey="id", OtherKey="ticket_id")]
-		public EntitySet<ticket_attachment> ticket_attachments
-		{
-			get
-			{
-				return this._ticket_attachments;
-			}
-			set
-			{
-				this._ticket_attachments.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ticket_priority_ticket", Storage="_ticket_priority", ThisKey="priority", OtherKey="id", IsForeignKey=true)]
-		public ticket_priority ticket_priority
-		{
-			get
-			{
-				return this._ticket_priority.Entity;
-			}
-			set
-			{
-				ticket_priority previousValue = this._ticket_priority.Entity;
-				if (((previousValue != value) 
-							|| (this._ticket_priority.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ticket_priority.Entity = null;
-						previousValue.tickets.Remove(this);
-					}
-					this._ticket_priority.Entity = value;
-					if ((value != null))
-					{
-						value.tickets.Add(this);
-						this._priority = value.id;
-					}
-					else
-					{
-						this._priority = default(int);
-					}
-					this.SendPropertyChanged("ticket_priority");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ticket_status_ticket", Storage="_ticket_status", ThisKey="status", OtherKey="id", IsForeignKey=true)]
-		public ticket_status ticket_status
-		{
-			get
-			{
-				return this._ticket_status.Entity;
-			}
-			set
-			{
-				ticket_status previousValue = this._ticket_status.Entity;
-				if (((previousValue != value) 
-							|| (this._ticket_status.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ticket_status.Entity = null;
-						previousValue.tickets.Remove(this);
-					}
-					this._ticket_status.Entity = value;
-					if ((value != null))
-					{
-						value.tickets.Add(this);
-						this._status = value.id;
-					}
-					else
-					{
-						this._status = default(int);
-					}
-					this.SendPropertyChanged("ticket_status");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_notes(note entity)
-		{
-			this.SendPropertyChanging();
-			entity.ticket = this;
-		}
-		
-		private void detach_notes(note entity)
-		{
-			this.SendPropertyChanging();
-			entity.ticket = null;
-		}
-		
-		private void attach_ticket_attachments(ticket_attachment entity)
-		{
-			this.SendPropertyChanging();
-			entity.ticket = this;
-		}
-		
-		private void detach_ticket_attachments(ticket_attachment entity)
-		{
-			this.SendPropertyChanging();
-			entity.ticket = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.notes")]
 	public partial class note : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2291,51 +1980,6 @@ namespace bug_tracker.code
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.projects_tickets")]
-	public partial class projects_ticket
-	{
-		
-		private System.Nullable<long> _project_id;
-		
-		private System.Nullable<long> _ticket_id;
-		
-		public projects_ticket()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_project_id", DbType="BigInt")]
-		public System.Nullable<long> project_id
-		{
-			get
-			{
-				return this._project_id;
-			}
-			set
-			{
-				if ((this._project_id != value))
-				{
-					this._project_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ticket_id", DbType="BigInt")]
-		public System.Nullable<long> ticket_id
-		{
-			get
-			{
-				return this._ticket_id;
-			}
-			set
-			{
-				if ((this._ticket_id != value))
-				{
-					this._ticket_id = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.projects_users")]
 	public partial class projects_user
 	{
@@ -2401,6 +2045,10 @@ namespace bug_tracker.code
 		
 		private System.Nullable<bool> _active;
 		
+		private EntitySet<ticket> _tickets;
+		
+		private EntityRef<aspnet_User> _aspnet_User;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2423,6 +2071,8 @@ namespace bug_tracker.code
 		
 		public project()
 		{
+			this._tickets = new EntitySet<ticket>(new Action<ticket>(this.attach_tickets), new Action<ticket>(this.detach_tickets));
+			this._aspnet_User = default(EntityRef<aspnet_User>);
 			OnCreated();
 		}
 		
@@ -2537,6 +2187,10 @@ namespace bug_tracker.code
 			{
 				if ((this._created_by != value))
 				{
+					if (this._aspnet_User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.Oncreated_byChanging(value);
 					this.SendPropertyChanging();
 					this._created_by = value;
@@ -2566,6 +2220,681 @@ namespace bug_tracker.code
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_ticket", Storage="_tickets", ThisKey="id", OtherKey="project_id")]
+		public EntitySet<ticket> tickets
+		{
+			get
+			{
+				return this._tickets;
+			}
+			set
+			{
+				this._tickets.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_project", Storage="_aspnet_User", ThisKey="created_by", OtherKey="UserId", IsForeignKey=true)]
+		public aspnet_User aspnet_User
+		{
+			get
+			{
+				return this._aspnet_User.Entity;
+			}
+			set
+			{
+				aspnet_User previousValue = this._aspnet_User.Entity;
+				if (((previousValue != value) 
+							|| (this._aspnet_User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._aspnet_User.Entity = null;
+						previousValue.projects.Remove(this);
+					}
+					this._aspnet_User.Entity = value;
+					if ((value != null))
+					{
+						value.projects.Add(this);
+						this._created_by = value.UserId;
+					}
+					else
+					{
+						this._created_by = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("aspnet_User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tickets(ticket entity)
+		{
+			this.SendPropertyChanging();
+			entity.project = this;
+		}
+		
+		private void detach_tickets(ticket entity)
+		{
+			this.SendPropertyChanging();
+			entity.project = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.aspnet_Users")]
+	public partial class aspnet_User : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _ApplicationId;
+		
+		private System.Guid _UserId;
+		
+		private string _UserName;
+		
+		private string _LoweredUserName;
+		
+		private string _MobileAlias;
+		
+		private bool _IsAnonymous;
+		
+		private System.DateTime _LastActivityDate;
+		
+		private EntitySet<project> _projects;
+		
+		private EntitySet<aspnet_UsersInRole> _aspnet_UsersInRoles;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnApplicationIdChanging(System.Guid value);
+    partial void OnApplicationIdChanged();
+    partial void OnUserIdChanging(System.Guid value);
+    partial void OnUserIdChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnLoweredUserNameChanging(string value);
+    partial void OnLoweredUserNameChanged();
+    partial void OnMobileAliasChanging(string value);
+    partial void OnMobileAliasChanged();
+    partial void OnIsAnonymousChanging(bool value);
+    partial void OnIsAnonymousChanged();
+    partial void OnLastActivityDateChanging(System.DateTime value);
+    partial void OnLastActivityDateChanged();
+    #endregion
+		
+		public aspnet_User()
+		{
+			this._projects = new EntitySet<project>(new Action<project>(this.attach_projects), new Action<project>(this.detach_projects));
+			this._aspnet_UsersInRoles = new EntitySet<aspnet_UsersInRole>(new Action<aspnet_UsersInRole>(this.attach_aspnet_UsersInRoles), new Action<aspnet_UsersInRole>(this.detach_aspnet_UsersInRoles));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid ApplicationId
+		{
+			get
+			{
+				return this._ApplicationId;
+			}
+			set
+			{
+				if ((this._ApplicationId != value))
+				{
+					this.OnApplicationIdChanging(value);
+					this.SendPropertyChanging();
+					this._ApplicationId = value;
+					this.SendPropertyChanged("ApplicationId");
+					this.OnApplicationIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoweredUserName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string LoweredUserName
+		{
+			get
+			{
+				return this._LoweredUserName;
+			}
+			set
+			{
+				if ((this._LoweredUserName != value))
+				{
+					this.OnLoweredUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._LoweredUserName = value;
+					this.SendPropertyChanged("LoweredUserName");
+					this.OnLoweredUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MobileAlias", DbType="NVarChar(16)")]
+		public string MobileAlias
+		{
+			get
+			{
+				return this._MobileAlias;
+			}
+			set
+			{
+				if ((this._MobileAlias != value))
+				{
+					this.OnMobileAliasChanging(value);
+					this.SendPropertyChanging();
+					this._MobileAlias = value;
+					this.SendPropertyChanged("MobileAlias");
+					this.OnMobileAliasChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsAnonymous", DbType="Bit NOT NULL")]
+		public bool IsAnonymous
+		{
+			get
+			{
+				return this._IsAnonymous;
+			}
+			set
+			{
+				if ((this._IsAnonymous != value))
+				{
+					this.OnIsAnonymousChanging(value);
+					this.SendPropertyChanging();
+					this._IsAnonymous = value;
+					this.SendPropertyChanged("IsAnonymous");
+					this.OnIsAnonymousChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastActivityDate", DbType="DateTime NOT NULL")]
+		public System.DateTime LastActivityDate
+		{
+			get
+			{
+				return this._LastActivityDate;
+			}
+			set
+			{
+				if ((this._LastActivityDate != value))
+				{
+					this.OnLastActivityDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastActivityDate = value;
+					this.SendPropertyChanged("LastActivityDate");
+					this.OnLastActivityDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_project", Storage="_projects", ThisKey="UserId", OtherKey="created_by")]
+		public EntitySet<project> projects
+		{
+			get
+			{
+				return this._projects;
+			}
+			set
+			{
+				this._projects.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_aspnet_UsersInRole", Storage="_aspnet_UsersInRoles", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<aspnet_UsersInRole> aspnet_UsersInRoles
+		{
+			get
+			{
+				return this._aspnet_UsersInRoles;
+			}
+			set
+			{
+				this._aspnet_UsersInRoles.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_projects(project entity)
+		{
+			this.SendPropertyChanging();
+			entity.aspnet_User = this;
+		}
+		
+		private void detach_projects(project entity)
+		{
+			this.SendPropertyChanging();
+			entity.aspnet_User = null;
+		}
+		
+		private void attach_aspnet_UsersInRoles(aspnet_UsersInRole entity)
+		{
+			this.SendPropertyChanging();
+			entity.aspnet_User = this;
+		}
+		
+		private void detach_aspnet_UsersInRoles(aspnet_UsersInRole entity)
+		{
+			this.SendPropertyChanging();
+			entity.aspnet_User = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.aspnet_Roles")]
+	public partial class aspnet_Role : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _ApplicationId;
+		
+		private System.Guid _RoleId;
+		
+		private string _RoleName;
+		
+		private string _LoweredRoleName;
+		
+		private string _Description;
+		
+		private EntitySet<aspnet_UsersInRole> _aspnet_UsersInRoles;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnApplicationIdChanging(System.Guid value);
+    partial void OnApplicationIdChanged();
+    partial void OnRoleIdChanging(System.Guid value);
+    partial void OnRoleIdChanged();
+    partial void OnRoleNameChanging(string value);
+    partial void OnRoleNameChanged();
+    partial void OnLoweredRoleNameChanging(string value);
+    partial void OnLoweredRoleNameChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    #endregion
+		
+		public aspnet_Role()
+		{
+			this._aspnet_UsersInRoles = new EntitySet<aspnet_UsersInRole>(new Action<aspnet_UsersInRole>(this.attach_aspnet_UsersInRoles), new Action<aspnet_UsersInRole>(this.detach_aspnet_UsersInRoles));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid ApplicationId
+		{
+			get
+			{
+				return this._ApplicationId;
+			}
+			set
+			{
+				if ((this._ApplicationId != value))
+				{
+					this.OnApplicationIdChanging(value);
+					this.SendPropertyChanging();
+					this._ApplicationId = value;
+					this.SendPropertyChanged("ApplicationId");
+					this.OnApplicationIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid RoleId
+		{
+			get
+			{
+				return this._RoleId;
+			}
+			set
+			{
+				if ((this._RoleId != value))
+				{
+					this.OnRoleIdChanging(value);
+					this.SendPropertyChanging();
+					this._RoleId = value;
+					this.SendPropertyChanged("RoleId");
+					this.OnRoleIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string RoleName
+		{
+			get
+			{
+				return this._RoleName;
+			}
+			set
+			{
+				if ((this._RoleName != value))
+				{
+					this.OnRoleNameChanging(value);
+					this.SendPropertyChanging();
+					this._RoleName = value;
+					this.SendPropertyChanged("RoleName");
+					this.OnRoleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoweredRoleName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string LoweredRoleName
+		{
+			get
+			{
+				return this._LoweredRoleName;
+			}
+			set
+			{
+				if ((this._LoweredRoleName != value))
+				{
+					this.OnLoweredRoleNameChanging(value);
+					this.SendPropertyChanging();
+					this._LoweredRoleName = value;
+					this.SendPropertyChanged("LoweredRoleName");
+					this.OnLoweredRoleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(256)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_Role_aspnet_UsersInRole", Storage="_aspnet_UsersInRoles", ThisKey="RoleId", OtherKey="RoleId")]
+		public EntitySet<aspnet_UsersInRole> aspnet_UsersInRoles
+		{
+			get
+			{
+				return this._aspnet_UsersInRoles;
+			}
+			set
+			{
+				this._aspnet_UsersInRoles.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_aspnet_UsersInRoles(aspnet_UsersInRole entity)
+		{
+			this.SendPropertyChanging();
+			entity.aspnet_Role = this;
+		}
+		
+		private void detach_aspnet_UsersInRoles(aspnet_UsersInRole entity)
+		{
+			this.SendPropertyChanging();
+			entity.aspnet_Role = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.aspnet_UsersInRoles")]
+	public partial class aspnet_UsersInRole : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _UserId;
+		
+		private System.Guid _RoleId;
+		
+		private EntityRef<aspnet_Role> _aspnet_Role;
+		
+		private EntityRef<aspnet_User> _aspnet_User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserIdChanging(System.Guid value);
+    partial void OnUserIdChanged();
+    partial void OnRoleIdChanging(System.Guid value);
+    partial void OnRoleIdChanged();
+    #endregion
+		
+		public aspnet_UsersInRole()
+		{
+			this._aspnet_Role = default(EntityRef<aspnet_Role>);
+			this._aspnet_User = default(EntityRef<aspnet_User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._aspnet_User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid RoleId
+		{
+			get
+			{
+				return this._RoleId;
+			}
+			set
+			{
+				if ((this._RoleId != value))
+				{
+					if (this._aspnet_Role.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRoleIdChanging(value);
+					this.SendPropertyChanging();
+					this._RoleId = value;
+					this.SendPropertyChanged("RoleId");
+					this.OnRoleIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_Role_aspnet_UsersInRole", Storage="_aspnet_Role", ThisKey="RoleId", OtherKey="RoleId", IsForeignKey=true)]
+		public aspnet_Role aspnet_Role
+		{
+			get
+			{
+				return this._aspnet_Role.Entity;
+			}
+			set
+			{
+				aspnet_Role previousValue = this._aspnet_Role.Entity;
+				if (((previousValue != value) 
+							|| (this._aspnet_Role.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._aspnet_Role.Entity = null;
+						previousValue.aspnet_UsersInRoles.Remove(this);
+					}
+					this._aspnet_Role.Entity = value;
+					if ((value != null))
+					{
+						value.aspnet_UsersInRoles.Add(this);
+						this._RoleId = value.RoleId;
+					}
+					else
+					{
+						this._RoleId = default(System.Guid);
+					}
+					this.SendPropertyChanged("aspnet_Role");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_aspnet_UsersInRole", Storage="_aspnet_User", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
+		public aspnet_User aspnet_User
+		{
+			get
+			{
+				return this._aspnet_User.Entity;
+			}
+			set
+			{
+				aspnet_User previousValue = this._aspnet_User.Entity;
+				if (((previousValue != value) 
+							|| (this._aspnet_User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._aspnet_User.Entity = null;
+						previousValue.aspnet_UsersInRoles.Remove(this);
+					}
+					this._aspnet_User.Entity = value;
+					if ((value != null))
+					{
+						value.aspnet_UsersInRoles.Add(this);
+						this._UserId = value.UserId;
+					}
+					else
+					{
+						this._UserId = default(System.Guid);
+					}
+					this.SendPropertyChanged("aspnet_User");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2587,8 +2916,441 @@ namespace bug_tracker.code
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.projects_all_details")]
-	public partial class projects_all_detail
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tickets")]
+	public partial class ticket : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _id;
+		
+		private System.DateTime _created_date;
+		
+		private System.Nullable<System.Guid> _created_by;
+		
+		private string _title;
+		
+		private string _description;
+		
+		private int _status;
+		
+		private int _priority;
+		
+		private System.Nullable<System.Guid> _dev_id;
+		
+		private System.Nullable<long> _project_id;
+		
+		private EntitySet<note> _notes;
+		
+		private EntitySet<ticket_attachment> _ticket_attachments;
+		
+		private EntityRef<ticket_priority> _ticket_priority;
+		
+		private EntityRef<project> _project;
+		
+		private EntityRef<ticket_status> _ticket_status;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(long value);
+    partial void OnidChanged();
+    partial void Oncreated_dateChanging(System.DateTime value);
+    partial void Oncreated_dateChanged();
+    partial void Oncreated_byChanging(System.Nullable<System.Guid> value);
+    partial void Oncreated_byChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    partial void OnstatusChanging(int value);
+    partial void OnstatusChanged();
+    partial void OnpriorityChanging(int value);
+    partial void OnpriorityChanged();
+    partial void Ondev_idChanging(System.Nullable<System.Guid> value);
+    partial void Ondev_idChanged();
+    partial void Onproject_idChanging(System.Nullable<long> value);
+    partial void Onproject_idChanged();
+    #endregion
+		
+		public ticket()
+		{
+			this._notes = new EntitySet<note>(new Action<note>(this.attach_notes), new Action<note>(this.detach_notes));
+			this._ticket_attachments = new EntitySet<ticket_attachment>(new Action<ticket_attachment>(this.attach_ticket_attachments), new Action<ticket_attachment>(this.detach_ticket_attachments));
+			this._ticket_priority = default(EntityRef<ticket_priority>);
+			this._project = default(EntityRef<project>);
+			this._ticket_status = default(EntityRef<ticket_status>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created_date", DbType="DateTime NOT NULL")]
+		public System.DateTime created_date
+		{
+			get
+			{
+				return this._created_date;
+			}
+			set
+			{
+				if ((this._created_date != value))
+				{
+					this.Oncreated_dateChanging(value);
+					this.SendPropertyChanging();
+					this._created_date = value;
+					this.SendPropertyChanged("created_date");
+					this.Oncreated_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created_by", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> created_by
+		{
+			get
+			{
+				return this._created_by;
+			}
+			set
+			{
+				if ((this._created_by != value))
+				{
+					this.Oncreated_byChanging(value);
+					this.SendPropertyChanging();
+					this._created_by = value;
+					this.SendPropertyChanged("created_by");
+					this.Oncreated_byChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(MAX)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this.OndescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._description = value;
+					this.SendPropertyChanged("description");
+					this.OndescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Int NOT NULL")]
+		public int status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					if (this._ticket_status.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_priority", DbType="Int NOT NULL")]
+		public int priority
+		{
+			get
+			{
+				return this._priority;
+			}
+			set
+			{
+				if ((this._priority != value))
+				{
+					if (this._ticket_priority.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnpriorityChanging(value);
+					this.SendPropertyChanging();
+					this._priority = value;
+					this.SendPropertyChanged("priority");
+					this.OnpriorityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dev_id", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> dev_id
+		{
+			get
+			{
+				return this._dev_id;
+			}
+			set
+			{
+				if ((this._dev_id != value))
+				{
+					this.Ondev_idChanging(value);
+					this.SendPropertyChanging();
+					this._dev_id = value;
+					this.SendPropertyChanged("dev_id");
+					this.Ondev_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_project_id", DbType="BigInt")]
+		public System.Nullable<long> project_id
+		{
+			get
+			{
+				return this._project_id;
+			}
+			set
+			{
+				if ((this._project_id != value))
+				{
+					if (this._project.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onproject_idChanging(value);
+					this.SendPropertyChanging();
+					this._project_id = value;
+					this.SendPropertyChanged("project_id");
+					this.Onproject_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ticket_note", Storage="_notes", ThisKey="id", OtherKey="ticket_id")]
+		public EntitySet<note> notes
+		{
+			get
+			{
+				return this._notes;
+			}
+			set
+			{
+				this._notes.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ticket_ticket_attachment", Storage="_ticket_attachments", ThisKey="id", OtherKey="ticket_id")]
+		public EntitySet<ticket_attachment> ticket_attachments
+		{
+			get
+			{
+				return this._ticket_attachments;
+			}
+			set
+			{
+				this._ticket_attachments.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ticket_priority_ticket", Storage="_ticket_priority", ThisKey="priority", OtherKey="id", IsForeignKey=true)]
+		public ticket_priority ticket_priority
+		{
+			get
+			{
+				return this._ticket_priority.Entity;
+			}
+			set
+			{
+				ticket_priority previousValue = this._ticket_priority.Entity;
+				if (((previousValue != value) 
+							|| (this._ticket_priority.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ticket_priority.Entity = null;
+						previousValue.tickets.Remove(this);
+					}
+					this._ticket_priority.Entity = value;
+					if ((value != null))
+					{
+						value.tickets.Add(this);
+						this._priority = value.id;
+					}
+					else
+					{
+						this._priority = default(int);
+					}
+					this.SendPropertyChanged("ticket_priority");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_ticket", Storage="_project", ThisKey="project_id", OtherKey="id", IsForeignKey=true)]
+		public project project
+		{
+			get
+			{
+				return this._project.Entity;
+			}
+			set
+			{
+				project previousValue = this._project.Entity;
+				if (((previousValue != value) 
+							|| (this._project.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._project.Entity = null;
+						previousValue.tickets.Remove(this);
+					}
+					this._project.Entity = value;
+					if ((value != null))
+					{
+						value.tickets.Add(this);
+						this._project_id = value.id;
+					}
+					else
+					{
+						this._project_id = default(Nullable<long>);
+					}
+					this.SendPropertyChanged("project");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ticket_status_ticket", Storage="_ticket_status", ThisKey="status", OtherKey="id", IsForeignKey=true)]
+		public ticket_status ticket_status
+		{
+			get
+			{
+				return this._ticket_status.Entity;
+			}
+			set
+			{
+				ticket_status previousValue = this._ticket_status.Entity;
+				if (((previousValue != value) 
+							|| (this._ticket_status.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ticket_status.Entity = null;
+						previousValue.tickets.Remove(this);
+					}
+					this._ticket_status.Entity = value;
+					if ((value != null))
+					{
+						value.tickets.Add(this);
+						this._status = value.id;
+					}
+					else
+					{
+						this._status = default(int);
+					}
+					this.SendPropertyChanged("ticket_status");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_notes(note entity)
+		{
+			this.SendPropertyChanging();
+			entity.ticket = this;
+		}
+		
+		private void detach_notes(note entity)
+		{
+			this.SendPropertyChanging();
+			entity.ticket = null;
+		}
+		
+		private void attach_ticket_attachments(ticket_attachment entity)
+		{
+			this.SendPropertyChanging();
+			entity.ticket = this;
+		}
+		
+		private void detach_ticket_attachments(ticket_attachment entity)
+		{
+			this.SendPropertyChanging();
+			entity.ticket = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.projects_tickets_details")]
+	public partial class projects_tickets_detail
 	{
 		
 		private long _project_id;
@@ -2611,7 +3373,7 @@ namespace bug_tracker.code
 		
 		private System.Nullable<bool> _active;
 		
-		public projects_all_detail()
+		public projects_tickets_detail()
 		{
 		}
 		
@@ -2771,6 +3533,159 @@ namespace bug_tracker.code
 				if ((this._active != value))
 				{
 					this._active = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.project_details")]
+	public partial class project_detail
+	{
+		
+		private long _ticket_id;
+		
+		private System.DateTime _created_date;
+		
+		private string _title;
+		
+		private string _priority;
+		
+		private string _status;
+		
+		private string _created_by;
+		
+		private string _dev;
+		
+		private System.Nullable<long> _project_id;
+		
+		public project_detail()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ticket_id", DbType="BigInt NOT NULL")]
+		public long ticket_id
+		{
+			get
+			{
+				return this._ticket_id;
+			}
+			set
+			{
+				if ((this._ticket_id != value))
+				{
+					this._ticket_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created_date", DbType="DateTime NOT NULL")]
+		public System.DateTime created_date
+		{
+			get
+			{
+				return this._created_date;
+			}
+			set
+			{
+				if ((this._created_date != value))
+				{
+					this._created_date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_priority", DbType="NVarChar(25)")]
+		public string priority
+		{
+			get
+			{
+				return this._priority;
+			}
+			set
+			{
+				if ((this._priority != value))
+				{
+					this._priority = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="NVarChar(50)")]
+		public string status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this._status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created_by", DbType="NVarChar(256)")]
+		public string created_by
+		{
+			get
+			{
+				return this._created_by;
+			}
+			set
+			{
+				if ((this._created_by != value))
+				{
+					this._created_by = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dev", DbType="NVarChar(256)")]
+		public string dev
+		{
+			get
+			{
+				return this._dev;
+			}
+			set
+			{
+				if ((this._dev != value))
+				{
+					this._dev = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_project_id", DbType="BigInt")]
+		public System.Nullable<long> project_id
+		{
+			get
+			{
+				return this._project_id;
+			}
+			set
+			{
+				if ((this._project_id != value))
+				{
+					this._project_id = value;
 				}
 			}
 		}

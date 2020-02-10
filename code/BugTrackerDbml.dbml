@@ -73,22 +73,6 @@
       <Association Name="log_type_log" Member="log_type1" ThisKey="log_type" OtherKey="id" Type="log_type" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tickets" Member="tickets">
-    <Type Name="ticket">
-      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="created_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="created_by" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="title" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
-      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="ticket_note" Member="notes" ThisKey="id" OtherKey="ticket_id" Type="note" />
-      <Association Name="ticket_ticket_attachment" Member="ticket_attachments" ThisKey="id" OtherKey="ticket_id" Type="ticket_attachment" />
-      <Association Name="ticket_projects_ticket" Member="projects_tickets" ThisKey="id" OtherKey="ticket_id" Type="projects_ticket" />
-      <Association Name="ticket_priority_ticket" Member="ticket_priority" ThisKey="priority" OtherKey="id" Type="ticket_priority" IsForeignKey="true" />
-      <Association Name="ticket_status_ticket" Member="ticket_status" ThisKey="status" OtherKey="id" Type="ticket_status" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.notes" Member="notes">
     <Type Name="note">
       <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -125,19 +109,12 @@
       <Column Name="page_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.projects_tickets" Member="projects_tickets">
-    <Type Name="projects_ticket">
-      <Column Name="project_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="ticket_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Association Name="ticket_projects_ticket" Member="ticket" ThisKey="ticket_id" OtherKey="id" Type="ticket" IsForeignKey="true" />
-      <Association Name="project_projects_ticket" Member="project" ThisKey="project_id" OtherKey="id" Type="project" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.projects_users" Member="projects_users">
     <Type Name="projects_user">
       <Column Name="project_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="user_id" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Association Name="project_projects_user" Member="project" ThisKey="project_id" OtherKey="id" Type="project" IsForeignKey="true" />
+      <Association Name="aspnet_User_projects_user" Member="aspnet_User" ThisKey="user_id" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.projects" Member="projects">
@@ -149,12 +126,63 @@
       <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="created_by" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="project_projects_ticket" Member="projects_tickets" ThisKey="id" OtherKey="project_id" Type="projects_ticket" />
       <Association Name="project_projects_user" Member="projects_users" ThisKey="id" OtherKey="project_id" Type="projects_user" />
+      <Association Name="project_ticket" Member="tickets" ThisKey="id" OtherKey="project_id" Type="ticket" />
+      <Association Name="aspnet_User_project" Member="aspnet_User" ThisKey="created_by" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.projects_all_details" Member="projects_all_details">
-    <Type Name="projects_all_detail">
+  <Table Name="dbo.aspnet_Users" Member="aspnet_Users">
+    <Type Name="aspnet_User">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredUserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileAlias" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="IsAnonymous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastActivityDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_User_projects_user" Member="projects_users" ThisKey="UserId" OtherKey="user_id" Type="projects_user" />
+      <Association Name="aspnet_User_project" Member="projects" ThisKey="UserId" OtherKey="created_by" Type="project" />
+      <Association Name="aspnet_User_aspnet_UsersInRole" Member="aspnet_UsersInRoles" ThisKey="UserId" OtherKey="UserId" Type="aspnet_UsersInRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Roles" Member="aspnet_Roles">
+    <Type Name="aspnet_Role">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredRoleName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Association Name="aspnet_Role_aspnet_UsersInRole" Member="aspnet_UsersInRoles" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_UsersInRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_UsersInRoles" Member="aspnet_UsersInRoles">
+    <Type Name="aspnet_UsersInRole">
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="aspnet_Role_aspnet_UsersInRole" Member="aspnet_Role" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_Role" IsForeignKey="true" />
+      <Association Name="aspnet_User_aspnet_UsersInRole" Member="aspnet_User" ThisKey="UserId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tickets" Member="tickets">
+    <Type Name="ticket">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="created_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="created_by" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dev_id" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="project_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Association Name="ticket_note" Member="notes" ThisKey="id" OtherKey="ticket_id" Type="note" />
+      <Association Name="ticket_ticket_attachment" Member="ticket_attachments" ThisKey="id" OtherKey="ticket_id" Type="ticket_attachment" />
+      <Association Name="ticket_priority_ticket" Member="ticket_priority" ThisKey="priority" OtherKey="id" Type="ticket_priority" IsForeignKey="true" />
+      <Association Name="project_ticket" Member="project" ThisKey="project_id" OtherKey="id" Type="project" IsForeignKey="true" />
+      <Association Name="ticket_status_ticket" Member="ticket_status" ThisKey="status" OtherKey="id" Type="ticket_status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.projects_tickets_details" Member="projects_tickets_details">
+    <Type Name="projects_tickets_detail">
       <Column Name="project_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="created_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
@@ -165,6 +193,18 @@
       <Column Name="Devs" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Users" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.project_details" Member="project_details">
+    <Type Name="project_detail">
+      <Column Name="ticket_id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="created_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="priority" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="status" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="created_by" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="dev" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="project_id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
