@@ -7,12 +7,12 @@
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
     <title></title>
-    <link rel="stylesheet" href="../Content/bootstrap.css" />
-    <link rel="stylesheet" href="../Content/site.css" />
+    <link rel="stylesheet" href="/Content/bootstrap.css" />
+    <link rel="stylesheet" href="/Content/site.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="/Scripts/bootstrap.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -21,6 +21,9 @@
 <body>
     <form id="form1" runat="server" style="height: 100%;">
         <div class="w-100 page-bar">
+            <div class="d-sm-flex d-md-none">
+                <a href="#" class="text-dark" data-toggle="modal" data-target="#menuModal"><i class="material-icons md-2">menu</i></a>
+            </div>
             <img class="logo" src="/images/icons/bug.png" />
             <span class="bug-tracker" style="margin-left: 15px">Bug Tracker</span>
             <div class="float-right">
@@ -34,7 +37,24 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+        <div class='modal left fade' id='menuModal' tabindex='-1' role='dialog' aria-labelledby='menuModalLabel' aria-hidden='true'>
+            <div class='modal-dialog' role='document'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div>
+                    <div class='modal-body'>
+                        <div class="mobile-menu">
+                            <asp:Literal ID="ltlMobileMenu" runat="server" ClientIDMode="Static" Text="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </body>
-    <script type="text/javascript" src="/Scripts/script.js"></script>
+
+<script type="text/javascript" src="/Scripts/script.js"></script>
 </html>

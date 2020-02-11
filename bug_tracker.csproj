@@ -229,6 +229,7 @@
     <Compile Include="code\MenusDB.cs" />
     <Compile Include="code\ProjectsDB.cs" />
     <Compile Include="code\TicketsDB.cs" />
+    <Compile Include="code\UsersDB.cs" />
     <Compile Include="code\WebFunctions.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>

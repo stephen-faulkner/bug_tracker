@@ -24,13 +24,49 @@ namespace bug_tracker.pages_dynamic.Projects
         protected global::System.Web.UI.WebControls.Literal ltlTitle;
 
         /// <summary>
-        /// ltlDescription control.
+        /// lblProjectDescr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlDescription;
+        protected global::System.Web.UI.WebControls.Label lblProjectDescr;
+
+        /// <summary>
+        /// btnEditProjectDescr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEditProjectDescr;
+
+        /// <summary>
+        /// dEditDescr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel dEditDescr;
+
+        /// <summary>
+        /// txtProjectDescr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtProjectDescr;
+
+        /// <summary>
+        /// btnSaveProjectDescr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveProjectDescr;
 
         /// <summary>
         /// pnlDevs control.
@@ -112,5 +148,23 @@ namespace bug_tracker.pages_dynamic.Projects
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltlTicketsOpen;
+
+        /// <summary>
+        /// ddlAddProjectDeveloper control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAddProjectDeveloper;
+
+        /// <summary>
+        /// ddlAddProjectUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAddProjectUser;
     }
 }

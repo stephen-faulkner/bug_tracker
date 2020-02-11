@@ -12,6 +12,8 @@ namespace bug_tracker.code
     public class ProjectsDB
     {
         static BugTrackerDbmlDataContext bug_tracker = new BugTrackerDbmlDataContext();
+        static WebFunctions wFunctions = new WebFunctions();
+        static string connStr = wFunctions.GetConnectionString();
 
         public static project GetProject(Int64 projectID)
         {
@@ -187,6 +189,40 @@ namespace bug_tracker.code
                                                              select pt).Distinct().ToList();
 
             return project_tickets;
+        }
+
+        public static void AddUserToProject(Int64 project_id, string user)
+        {
+            using(SqlConnection sqlCon = new SqlConnection(connStr))
+            {
+                sqlCon.Open();
+                using(SqlCommand sqlCmd = new SqlCommand("bug_tracker_projects_add_user", sqlCon))
+                {
+                    sqlCmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    sqlCmd.Parameters.AddWithValue("@project_id", project_id);
+                    sqlCmd.Parameters.AddWithValue("@user_id", user);
+
+                    sqlCmd.ExecuteNonQuery();
+                }
+                sqlCon.Close();
+            }
+        }
+
+        public static void RemoveUserFromProject(Int64 project_id, string user)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connStr))
+            {
+                sqlCon.Open();
+                using (SqlCommand sqlCmd = new SqlCommand("bug_tracker_projects_remove_user", sqlCon))
+                {
+                    sqlCmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    sqlCmd.Parameters.AddWithValue("@project_id", project_id);
+                    sqlCmd.Parameters.AddWithValue("@user_id", user);
+
+                    sqlCmd.ExecuteNonQuery();
+                }
+                sqlCon.Close();
+            }
         }
     }
 }

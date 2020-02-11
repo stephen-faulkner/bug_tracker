@@ -25,6 +25,7 @@ namespace bug_tracker.masters
             if (!IsPostBack)
             {
                 wFunctions.BuildMenu(ltlMenu);
+                ltlMobileMenu.Text = ltlMenu.Text;
             }
         }
 
